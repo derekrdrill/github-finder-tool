@@ -61,7 +61,7 @@ watchEffect(() => {
       class="border max-h-96 overflow-auto relative rounded-box top-1 w-5/6 lg:w-3/5"
       v-if="ghSearchMenuItems?.length > 0"
     >
-      <ul class="flex flex-col w-full bg-base-100">
+      <ul class="flex flex-col w-full bg-gray-800">
         <li
           :key="item.id"
           class="bg-gray-800 flex justify-between items-center p-4 w-full hover:bg-base-300"
