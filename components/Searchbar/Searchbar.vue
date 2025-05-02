@@ -34,11 +34,11 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="dropdown flex flex-col items-center">
+  <div class="flex flex-col items-center">
     <div class="relative w-5/6 lg:w-3/5">
       <input
         :value="appStore.ghSearchValue"
-        class="input w-full pr-16"
+        class="input w-full pr-16 bg-gray-800"
         placeholder="Enter a Github username"
         @input="handleSearchChange"
       />
@@ -58,13 +58,13 @@ watchEffect(() => {
       </div>
     </div>
     <div
-      class="border max-h-96 overflow-auto relative rounded-box top-1 w-5/6 lg:w-3/5"
+      class="dropdown border max-h-96 overflow-auto relative rounded-box top-1 w-5/6 lg:w-3/5"
       v-if="ghSearchMenuItems?.length > 0"
     >
       <ul class="flex flex-col w-full bg-gray-800">
         <li
           :key="item.id"
-          class="bg-gray-800 flex justify-between items-center p-4 w-full hover:bg-base-300"
+          class="flex justify-between items-center p-4 w-full hover:bg-base-300"
           v-for="item in ghSearchMenuItems"
         >
           <div>
