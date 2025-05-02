@@ -64,7 +64,7 @@ watchEffect(() => {
       <ul class="flex flex-col w-full bg-base-100">
         <li
           :key="item.id"
-          class="flex justify-between items-center p-4 w-full hover:bg-base-300"
+          class="bg-gray-800 flex justify-between items-center p-4 w-full hover:bg-base-300"
           v-for="item in ghSearchMenuItems"
         >
           <div>

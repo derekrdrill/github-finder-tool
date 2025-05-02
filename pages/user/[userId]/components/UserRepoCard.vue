@@ -12,7 +12,7 @@ const cardBgColorByLanguage = GH_COLORS[languageForGhColor] || 'lightgray';
 
 <template>
   <a
-    class="card col-span-1 bg-base-100 border border-base-100 h-40 shadow-xl hover:border-red-400"
+    class="card col-span-1 bg-gray-700 border border-gray-700 h-40 shadow-xl hover:border-red-400"
     target="_blank"
     :href="html_url"
   >
