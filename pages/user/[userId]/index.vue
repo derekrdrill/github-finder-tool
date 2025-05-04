@@ -11,7 +11,7 @@ const { data: userRepos } = await fetchGhRepoByUser({
 });
 
 const {
-  avatar_url: avatarURL,
+  avatar_url: avatarUrl,
   bio,
   company,
   created_at,
@@ -24,7 +24,6 @@ const {
   name,
   twitter_username: twitterUsername,
   type,
-  update_at: updatedAt,
 } = userProfile || {};
 
 const followersAndFollowing = [`${followers ?? 0} followers`, `${following ?? 0} following`];
@@ -38,13 +37,13 @@ const memberSince = new Date(created_at || '').toLocaleDateString('en-US', {
 
 <template>
   <div class="flex flex-col gap-6 mx-5 md:mx-20 2xl:mx-40">
-    <NuxtLink class="btn btn-link no-underline p-0 w-fit" to="/">
+    <button class="btn btn-link no-underline p-0 w-fit" @click="useNuxtApp().$router.back">
       <Icon name="material-symbols:keyboard-double-arrow-left-rounded" size="20" />
-      Go back home
-    </NuxtLink>
+      Go back
+    </button>
     <div class="flex flex-col gap-4 items-center md:items-start">
       <UserPersonalInfoAndImage
-        :avatarURL="avatarURL"
+        :avatar-url="avatarUrl"
         :bio="bio"
         :login="login"
         :name="name"
@@ -58,7 +57,7 @@ const memberSince = new Date(created_at || '').toLocaleDateString('en-US', {
             <UserMetadata :metadata="company" icon="openmoji:office-building" />
             <UserMetadata :metadata="email" icon="openmoji:e-mail" />
             <UserMetadata
-              :iconSize="14"
+              :icon-size="14"
               :link="`https://www.x.com/${twitterUsername}`"
               :metadata="twitterUsername"
               icon="logos:x"
@@ -73,19 +72,13 @@ const memberSince = new Date(created_at || '').toLocaleDateString('en-US', {
         </div>
         <div class="grid grid-cols-1 gap-4 w-full lg:grid-cols-2 xl:grid-cols-3">
           <UserRepoCard
-            :description="repo.description"
-            :html_url="repo.html_url"
-            :language="repo.language"
-            :key="repo.id"
-            :name="repo.name"
-            :updatedAt="
-              new Date(repo.updated_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })
-            "
             v-for="repo in userRepos"
+            :key="repo.id"
+            :description="repo.description"
+            :html-url="repo.html_url"
+            :language="repo.language"
+            :name="repo.name"
+            :updated-at="repo.updated_at"
           />
         </div>
       </div>

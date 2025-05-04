@@ -16,6 +16,10 @@ export default defineNuxtConfig({
       path: '~/pages/user/[userId]/components',
       pathPrefix: false,
     },
+    {
+      path: '~/pages/users/components',
+      pathPrefix: false,
+    },
   ],
   modules: [
     '@nuxtjs/storybook',
