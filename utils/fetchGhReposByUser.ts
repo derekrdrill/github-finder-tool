@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAsyncData, useRuntimeConfig } from '#app';
 
 export const fetchGhRepoByUser = async ({ userId }: { userId: string }) => {
   const runtimeConfig = useRuntimeConfig();

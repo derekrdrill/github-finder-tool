@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  avatarURL?: string;
+  avatarUrl?: string;
   bio?: string;
   login?: string;
   name?: string;
@@ -10,7 +10,7 @@ defineProps<{
 
 <template>
   <div class="flex flex-col gap-6 items-center md:flex-row md:gap-12">
-    <img :src="avatarURL" alt="User Avatar" class="w-40 h-40 rounded-full" />
+    <img :src="avatarUrl" alt="User Avatar" class="w-40 h-40 rounded-full" />
     <div class="flex flex-col gap-2 items-center md:items-start">
       <div class="flex flex-col justify-center">
         <h1 class="text-xl font-bold">{{ name }}</h1>

@@ -1,11 +1,24 @@
 <script setup lang="ts">
+const {
+  buttonText = 'View all results',
+  handleClick,
+  shouldDisableSearchOnChange,
+} = defineProps<{
+  buttonText?: string;
+  handleClick?: () => void;
+  resultsCount?: number;
+  shouldDisableSearchOnChange?: boolean;
+}>();
+
 const appStore = useAppStore();
 const ghSearchMenuItems = useState<GHSearchResponse[]>('ghSearchMenuiItems', () => []);
 const isLoading = useState<boolean>('isLoading', () => false);
 
 const handleSearchChange = async (e: Event) => {
+  // if (!shouldDisableSearchOnChange) {
   const searchValue = (e.target as HTMLInputElement).value;
   appStore.setGhSearchValue(searchValue);
+  // }
 };
 
 const handleSearchClear = () => {
@@ -14,11 +27,21 @@ const handleSearchClear = () => {
   isLoading.value = false;
 };
 
+const handleSearchButtonClick = () => {
+  if (appStore.ghSearchValue?.length) {
+    if (handleClick) {
+      handleClick();
+    } else {
+      navigateTo(`/users`);
+    }
+  }
+};
+
 watchEffect(() => {
-  if (appStore.ghSearchValue?.length > 2) {
+  if (appStore.ghSearchValue?.length > 2 && !shouldDisableSearchOnChange) {
     isLoading.value = true;
 
-    fetchGhUsers({
+    fetchGhSearchUsers({
       perPage: 10,
       username: appStore.ghSearchValue,
     }).then(data => {
@@ -34,8 +57,8 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
-    <div class="relative w-5/6 lg:w-3/5">
+  <div class="flex flex-col w-full">
+    <div class="flex gap-4 items-center relative">
       <input
         :value="appStore.ghSearchValue"
         class="input w-full pr-16 bg-gray-800"
@@ -54,12 +77,14 @@ watchEffect(() => {
             v-if="!isLoading && appStore.ghSearchValue"
           />
         </button>
-        <NuxtLink class="btn btn-primary btn-sm" to="/users"> View all results</NuxtLink>
+        <button class="btn btn-primary btn-sm" @click="handleSearchButtonClick">
+          {{ buttonText }}
+        </button>
       </div>
     </div>
     <div
-      class="dropdown border max-h-96 overflow-auto relative rounded-box top-1 w-5/6 lg:w-3/5"
-      v-if="ghSearchMenuItems?.length > 0"
+      class="dropdown border max-h-96 overflow-auto relative rounded-box top-1"
+      v-if="ghSearchMenuItems?.length > 0 && !shouldDisableSearchOnChange"
     >
       <ul class="flex flex-col w-full bg-gray-800">
         <li

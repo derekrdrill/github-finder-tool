@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { useAsyncData, useRuntimeConfig } from '#app';
 
 export const fetchGhUser = async ({ userId }: { userId: string }) => {
   const runtimeConfig = useRuntimeConfig();
@@ -11,7 +10,7 @@ export const fetchGhUser = async ({ userId }: { userId: string }) => {
     headers: { Authorization: `token ${githubApiToken}` },
   });
 
-  const { data, error, status } = await useAsyncData(`gh-users-${userId}`, async () => {
+  const { data, error, status } = await useAsyncData(`gh-user-${userId}`, async () => {
     const response = await ghRequest.get(`/users/${userId}`);
     return response.data;
   });

@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-export const fetchGhUsers = async ({
+export const fetchGhSearchUsers = async ({
+  page,
   perPage,
   username,
 }: {
+  page?: number;
   perPage: number;
   username: string;
 }) => {
@@ -16,9 +18,15 @@ export const fetchGhUsers = async ({
     headers: { Authorization: `token ${githubApiToken}` },
   });
 
+  const ghRequestParams = new URLSearchParams({
+    page: page?.toString() || '1',
+    per_page: perPage.toString(),
+    q: username,
+  });
+
   const { data, error, status } = await useAsyncData(
-    `gh-users-${username}-${perPage}`,
-    async () => await ghRequest.get(`/users/${username}`),
+    `gh-search-users-${username}-${perPage}-${page}`,
+    async () => await ghRequest.get(`/search/users?${ghRequestParams}`),
     { immediate: true }
   );
 
@@ -26,8 +34,11 @@ export const fetchGhUsers = async ({
     throw new Error('Failed to fetch GitHub user data');
   }
 
+  // console.log(data);
+
   return {
     data: data.value?.data.items,
+    total: data.value?.data.total_count,
     status: status.value,
     error: error.value,
   };

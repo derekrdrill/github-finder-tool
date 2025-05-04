@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center p-4">
+  <div class="flex justify-center items-center p-4 z-20">
     <Icon name="logos:github-octocat" size="60" />
     <div class="flex flex-col">
       <h1 class="text-4xl font-bold text-gray-300">Github Finder</h1>
