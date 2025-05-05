@@ -36,7 +36,7 @@ const memberSince = new Date(created_at || '').toLocaleDateString('en-US', {
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 mx-5 md:mx-20 2xl:mx-40">
+  <div class="flex flex-col gap-6 mx-5 pb-8 md:mx-20 2xl:mx-40">
     <button class="btn btn-link no-underline p-0 w-fit" @click="useNuxtApp().$router.back">
       <Icon name="material-symbols:keyboard-double-arrow-left-rounded" size="20" />
       Go back
