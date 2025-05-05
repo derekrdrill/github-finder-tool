@@ -34,8 +34,6 @@ export const fetchGhSearchUsers = async ({
     throw new Error('Failed to fetch GitHub user data');
   }
 
-  // console.log(data);
-
   return {
     data: data.value?.data.items,
     total: data.value?.data.total_count,
