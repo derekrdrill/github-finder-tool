@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import classNames from 'classnames';
+
 const { language, updatedAt } = defineProps<{
   description: string | null;
   htmlUrl: string;
@@ -13,18 +15,34 @@ const updatedAtString = new Date(updatedAt).toLocaleDateString('en-US', {
   month: 'long',
   day: 'numeric',
 });
+
+const isHoveringRepoCard = ref(false);
 </script>
 
 <template>
   <a
-    class="card col-span-1 bg-gray-700 border border-gray-700 h-40 shadow-xl hover:border-red-400"
+    class="card col-span-1 bg-gray-700 border border-gray-700 h-40 drop-shadow-xs drop-shadow-gray-300 md:drop-shadow-none hover:border-red-400"
     target="_blank"
     :href="htmlUrl"
+    @mouseover="isHoveringRepoCard = true"
+    @mouseout="isHoveringRepoCard = false"
   >
     <div class="card-body p-3 overflow-hidden">
       <div class="flex flex-col flex-start">
-        <div class="badge text-black text-xs" :style="{ backgroundColor: cardBgColorByLanguage }">
-          {{ language || 'No language found ' }}
+        <div class="flex justify-between text-xs">
+          <span class="badge text-black" :style="{ backgroundColor: cardBgColorByLanguage }">
+            {{ language || 'No language found ' }}
+          </span>
+          <span
+            :class="
+              classNames({
+                'lg:hidden': !isHoveringRepoCard,
+                block: isHoveringRepoCard,
+              })
+            "
+          >
+            <Icon name="line-md:external-link" size="16" />
+          </span>
         </div>
         <h2 class="card-title truncate">
           {{ name }}
