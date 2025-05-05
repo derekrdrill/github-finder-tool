@@ -11,14 +11,12 @@ const {
 }>();
 
 const appStore = useAppStore();
-const ghSearchMenuItems = useState<GHSearchResponse[]>('ghSearchMenuiItems', () => []);
-const isLoading = useState<boolean>('isLoading', () => false);
+const ghSearchMenuItems = ref<GHSearchResponse[]>([]);
+const isLoading = ref<boolean>(false);
 
 const handleSearchChange = async (e: Event) => {
-  // if (!shouldDisableSearchOnChange) {
   const searchValue = (e.target as HTMLInputElement).value;
   appStore.setGhSearchValue(searchValue);
-  // }
 };
 
 const handleSearchClear = () => {
@@ -60,7 +58,7 @@ watchEffect(() => {
   <div class="flex flex-col w-full">
     <div class="flex gap-4 items-center relative">
       <input
-        :value="appStore.ghSearchValue"
+        v-model="appStore.ghSearchValue"
         class="input w-full pr-16 bg-gray-800"
         placeholder="Enter a Github username"
         @input="handleSearchChange"

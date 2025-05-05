@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const appStore = useAppStore();
-const ghSearchUsers = useState<GHSearchResponse[]>('ghSearchUsers', () => []);
-const ghSearchUsersTotal = useState<number>('ghSearchUsersTotal', () => 0);
-const ghSearchUsersPage = useState<number>('ghSearchUsersPage', () => 1);
-const hasMounted = useState<boolean>('hasMounted', () => false);
-const isLoading = useState<boolean>('isLoading', () => false);
-const shouldLoadMoreGhUsers = useState<boolean>('shouldLoadMoreGhUsers', () => false);
+const ghSearchUsers = ref<GHSearchResponse[]>([]);
+const ghSearchUsersTotal = ref<number>(0);
+const ghSearchUsersPage = ref<number>(1);
+const hasMounted = ref<boolean>(false);
+const isLoading = ref<boolean>(false);
+const shouldLoadMoreGhUsers = ref<boolean>(false);
 
 const handleFetchGhSearchUsers = async () => {
   isLoading.value = true;

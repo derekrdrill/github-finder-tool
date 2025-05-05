@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import classNames from 'classnames';
-
 const { language, updatedAt } = defineProps<{
   description: string | null;
   htmlUrl: string;
@@ -34,12 +32,10 @@ const isHoveringRepoCard = ref(false);
             {{ language || 'No language found ' }}
           </span>
           <span
-            :class="
-              classNames({
-                'lg:hidden': !isHoveringRepoCard,
-                block: isHoveringRepoCard,
-              })
-            "
+            v-bind:class="{
+              'lg:hidden': !isHoveringRepoCard,
+              block: isHoveringRepoCard,
+            }"
           >
             <Icon name="line-md:external-link" size="16" />
           </span>
