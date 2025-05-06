@@ -50,5 +50,5 @@ jobs:
       - name: Merge main into development
         run: |
           git checkout development
-          git merge main -m "Backmerge main into development" --allow-unrelated-histories
+          git merge main --allow-unrelated-histories --no-commit
           git push origin development
