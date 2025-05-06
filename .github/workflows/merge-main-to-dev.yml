@@ -37,6 +37,10 @@ jobs:
 
       - name: Configure Git
         run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.RULESET_OVERRIDE_SECRET }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
