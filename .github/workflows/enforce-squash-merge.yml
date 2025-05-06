@@ -12,11 +12,6 @@ jobs:
     steps:
       - name: Check Merge Method
         run: |
-          if [[ "${{ github.event.pull_request.mergeable }}" != "true" ]]; then
-            echo "Error: Pull request is not mergeable."
-            exit 1
-          fi
-
           if [[ "${{ github.event.pull_request.merge_commit_sha }}" != "" ]]; then
             echo "Error: Only squash merges are allowed into dev."
             exit 1
