@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// comment
 const headerRef = useState<HTMLElement | null>('headerRef', () => null);
 </script>
 <template>
