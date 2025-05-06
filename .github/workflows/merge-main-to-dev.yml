@@ -15,12 +15,28 @@ jobs:
         with:
           token: ${{ secrets.GH_FINDER_SECRET }}
 
-      - name: Set up Git and SSH
+      - name: Set up SSH for Deploy Key
         run: |
+          # Create the SSH directory
           mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          # Add the deploy key
           echo "${{ secrets.RULESET_OVERRIDE_SECRET }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+
+          # Add GitHub to known hosts
           ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          # Configure SSH to use the deploy key
+          echo "Host github.com
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no" > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
+      - name: Configure Git
+        run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -30,5 +46,5 @@ jobs:
       - name: Merge main into development
         run: |
           git checkout development
-          git merge main --allow-unrelated-histories
+          git merge main --no-ff -m "Backmerge main into development"
           git push origin development
