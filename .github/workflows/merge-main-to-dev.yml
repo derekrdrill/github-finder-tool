@@ -10,6 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up SSH for Deploy Key
+        run: |
+          # Create the SSH directory
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          # Add the deploy key
+          echo "${{ secrets.RULESET_OVERRIDE_SECRET }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          # Add GitHub to known hosts
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+          # Configure SSH to use the deploy key
+          echo "Host github.com
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no" > ~/.ssh/config
+          chmod 600 ~/.ssh/config
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
