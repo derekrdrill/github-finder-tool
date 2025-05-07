@@ -40,8 +40,8 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Rebase development onto main
+      - name: Merge main into development
         run: |
           git checkout development
-          git rebase origin/main
-          git push origin development --force-with-lease
+          git merge main --allow-unrelated-histories
+          git push origin development
