@@ -26,6 +26,7 @@ jobs:
             IdentityFile ~/.ssh/id_ed25519
             StrictHostKeyChecking no" > ~/.ssh/config
           chmod 600 ~/.ssh/config
+
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
@@ -39,8 +40,8 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Merge main into development
+      - name: Fast-forward development to main
         run: |
           git checkout development
-          git merge main --allow-unrelated-histories
+          git merge --ff-only origin/main
           git push origin development
