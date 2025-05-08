@@ -58,7 +58,7 @@ watch([() => ghSearchUsers.value], ([newSearchValues]) => {
 
 <template>
   <div
-    class="bg-gray-900 border-b-2 border-b-info-content h-32 mb-6 pt-10 shadow-2xl sticky top-0 w-full z-20"
+    class="bg-base-100 border-b-2 border-b-info-content h-32 mb-6 pt-10 shadow-lg sticky top-0 w-full z-20"
   >
     <div class="grid grid-cols-12 gap-4">
       <div class="col-start-2 col-end-9 md:col-start-3 md:col-end-11">
@@ -80,7 +80,7 @@ watch([() => ghSearchUsers.value], ([newSearchValues]) => {
     <div
       v-if="!ghSearchUsers.length"
       v-for="_ in 10"
-      class="col-span-1 h-52 skeleton bg-gray-800 w-full"
+      class="col-span-1 h-52 skeleton bg-base-300 w-full"
     />
     <UserResultCard
       v-for="(user, userIndex) in ghSearchUsers"

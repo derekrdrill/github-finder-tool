@@ -59,7 +59,7 @@ watchEffect(() => {
     <div class="flex gap-4 items-center relative">
       <input
         v-model="appStore.ghSearchValue"
-        class="input w-full pr-16 bg-gray-800"
+        class="input w-full pr-16"
         placeholder="Enter a Github username"
         @input="handleSearchChange"
       />
@@ -75,7 +75,7 @@ watchEffect(() => {
             v-if="!isLoading && appStore.ghSearchValue"
           />
         </button>
-        <button class="btn btn-primary btn-sm" @click="handleSearchButtonClick">
+        <button class="btn btn-primary btn-sm btn-outline" @click="handleSearchButtonClick">
           {{ buttonText }}
         </button>
       </div>
@@ -84,7 +84,7 @@ watchEffect(() => {
       class="dropdown border max-h-96 overflow-auto relative rounded-box top-1"
       v-if="ghSearchMenuItems?.length > 0 && !shouldDisableSearchOnChange"
     >
-      <ul class="flex flex-col w-full bg-gray-800">
+      <ul class="flex flex-col w-full">
         <li
           :key="item.id"
           class="flex justify-between items-center p-4 w-full hover:bg-base-300"

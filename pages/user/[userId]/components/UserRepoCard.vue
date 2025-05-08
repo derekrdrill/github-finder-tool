@@ -19,9 +19,9 @@ const isHoveringRepoCard = ref(false);
 
 <template>
   <a
-    class="card col-span-1 bg-gray-700 border border-gray-700 h-40 drop-shadow-xs drop-shadow-gray-300 md:drop-shadow-none hover:border-red-400"
-    target="_blank"
     :href="htmlUrl"
+    class="card col-span-1 bg-base-200 border border-base-300 h-40 drop-shadow-xs drop-shadow-gray-300 md:drop-shadow-none hover:border-red-400"
+    target="_blank"
     @mouseover="isHoveringRepoCard = true"
     @mouseout="isHoveringRepoCard = false"
   >
