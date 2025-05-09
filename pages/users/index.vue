@@ -58,10 +58,10 @@ watch([() => ghSearchUsers.value], ([newSearchValues]) => {
 
 <template>
   <div
-    class="bg-base-100 border-b-2 border-b-info-content h-32 mb-6 pt-10 shadow-lg sticky top-0 w-full z-20"
+    class="bg-base-100 border-b border-b-info-content h-32 mb-6 pb-28 pt-10 shadow-lg sticky top-0 w-full z-20 lg:pb-0"
   >
-    <div class="grid grid-cols-12 gap-4">
-      <div class="col-start-2 col-end-9 md:col-start-3 md:col-end-11">
+    <div class="grid grid-cols-12 gap-2 mx-8 md:mx-16 lg:gap-4 lg:mx-0">
+      <div class="col-start-1 col-end-13 lg:col-start-3 lg:col-end-11">
         <Searchbar
           :button-text="'Search'"
           :handle-click="handleGhSearchUsersPageReset"
@@ -69,7 +69,7 @@ watch([() => ghSearchUsers.value], ([newSearchValues]) => {
           :should-disable-search-on-change="true"
         />
       </div>
-      <p class="col-span-3 lg:col-span-1 italic pt-2">
+      <p class="col-span-12 lg:col-span-2 italic pt-2">
         {{ ghSearchUsersTotal > 1000 ? 1000 : ghSearchUsersTotal }} results
       </p>
     </div>
@@ -88,6 +88,7 @@ watch([() => ghSearchUsers.value], ([newSearchValues]) => {
       :avatar-url="user.avatar_url"
       :html-url="user.html_url"
       :index="userIndex"
+      :is-last-item="userIndex === ghSearchUsers.length - 1"
       :login="user.login"
     />
   </div>
