@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ssh-key: ${{ secrets.GH_FINDER_SECRET }}
+          token: ${{ secrets.GH_FINDER_SECRET }}
 
       - name: Configure Git
         run: |
