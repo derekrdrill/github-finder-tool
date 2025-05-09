@@ -1,0 +1,46 @@
+name: Create Release Branch and PR
+
+on:
+  push:
+    tags:
+      - release-build
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create release branch
+        id: create_branch
+        run: |
+          # Generate a unique release branch name
+          release_branch="release/$(date +'%Y%m%d%H%M%S')"
+          echo "release_branch=$release_branch" >> $GITHUB_ENV
+
+          # Create the release branch from development
+          git fetch origin development
+          git checkout -b $release_branch origin/development
+          git push origin $release_branch
+
+      - name: Create pull request
+        id: create_pr
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GH_FINDER_SECRET }}
+          head: ${{ env.release_branch }}
+          base: main
+          title: 'Release: ${{ env.release_branch }}'
+          body: 'This is an automated release branch created from the `build-release` tag.'
+
+      - name: Remove build-release tag
+        if: success()
+        run: |
+          git push --delete origin build-release
