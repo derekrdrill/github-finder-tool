@@ -1,14 +1,25 @@
 <script setup lang="ts">
-const { login } = defineProps<{
+const { isLastItem, login } = defineProps<{
   avatarUrl: string;
   htmlUrl: string;
+  index: number;
+  isLastItem?: boolean;
   login: string;
 }>();
 
 const profileLink = `/user/${login}`;
 </script>
 <template>
-  <div class="col-span-1 border-b border-b-info pb-8 px-4 md:border-none md:pb-0 md:px-0">
+  <div
+    v-bind:class="[
+      'col-span-1 pb-8 px-4 md:border-none md:pb-0 md:px-0',
+      {
+        'border-b': !isLastItem,
+        'border-b-gray-700': $colorMode.value === 'dark',
+        'border-b-base-300': $colorMode.value === 'light',
+      },
+    ]"
+  >
     <div>
       <img :src="avatarUrl" alt="User Avatar" class="h-28 w-28 rounded-4xl" />
       <h2 class="card-title">{{ login }}</h2>
