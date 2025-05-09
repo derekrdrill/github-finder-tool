@@ -1,6 +1,17 @@
 import tailwindcss from '@tailwindcss/vite';
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: 'GitHub Finder Live',
+      meta: [
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+        },
+      ],
+    },
+  },
   compatibilityDate: '2024-11-01',
   css: ['~/main.css'],
   devtools: { enabled: true },
