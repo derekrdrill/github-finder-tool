@@ -26,3 +26,5 @@ export const useAppStore = defineStore('appStore', {
     pick: ['_ghSearchValue', '_previousPath'],
   },
 });
+
+// test comment
